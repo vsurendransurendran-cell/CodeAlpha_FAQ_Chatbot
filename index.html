@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ Assistant · CodeAlpha</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app" data-max-length="{{ max_length }}">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">?</span>
+        <div>
+          <h1>FAQ Assistant</h1>
+          <p class="subtitle">Answers from a curated knowledge base</p>
+        </div>
+      </div>
+      <div class="actions">
+        <select id="category" aria-label="Filter by category">
+          <option value="">All topics</option>
+        </select>
+        <button id="stats-btn" class="icon-btn" type="button" title="Usage statistics" aria-label="Usage statistics">📊</button>
+        <button id="export-btn" class="icon-btn" type="button" title="Export conversation" aria-label="Export conversation">⬇</button>
+        <button id="theme-btn" class="icon-btn" type="button" title="Toggle theme" aria-label="Toggle theme">🌓</button>
+        <button id="clear-btn" class="btn-ghost" type="button">Clear</button>
+      </div>
+    </header>
+
+    <main id="messages" class="messages" aria-live="polite"></main>
+
+    <section id="suggestions" class="suggestions" aria-label="Suggested questions"></section>
+
+    <form id="chat-form" class="composer" autocomplete="off">
+      <input id="input" type="text" maxlength="{{ max_length }}" placeholder="Ask a question…" aria-label="Your question" autofocus>
+      <button id="send-btn" type="submit">Send</button>
+    </form>
+    <p id="form-error" class="form-error" role="alert" hidden></p>
+    <p class="footnote">This bot finds the closest FAQ using text similarity. It does not generate new answers.</p>
+  </div>
+
+  <dialog id="stats-dialog">
+    <h2>Usage statistics</h2>
+    <p class="muted">Counts since the server started. Message text is not stored.</p>
+    <div id="stats-body"></div>
+    <button id="stats-close" type="button" class="btn-ghost">Close</button>
+  </dialog>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
